@@ -1,38 +1,47 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Web Truyện')</title>
+@extends('layouts.app')
 
-    {{-- Google Fonts: Inter + Noto Serif (cho tiêu đề truyện) --}}
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+@section('title', 'Trang chủ - WebTruyen')
 
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-50 text-gray-800 font-[Inter]">
-
-    {{-- Header --}}
-    <header class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-indigo-600 font-[Noto_Serif]">📚 Web Truyện</h1>
-            <nav class="space-x-4 text-[15px]">
-                <a href="/" class="text-gray-700 hover:text-indigo-600 font-medium">Trang chủ</a>
-                <a href="/index" class="text-gray-700 hover:text-indigo-600 font-medium">Danh sách</a>
-                <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Liên hệ</a>
-            </nav>
+@section('content')
+    {{-- Banner / Slider --}}
+    <section class="mb-6">
+        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl p-8 text-white text-center shadow">
+            <h1 class="text-3xl font-bold mb-2">Chào mừng đến với WebTruyen</h1>
+            <p class="text-lg">Đọc truyện online miễn phí – cập nhật nhanh nhất!</p>
         </div>
-    </header>
+    </section>
 
-    {{-- Nội dung trang --}}
-    <main class="max-w-7xl mx-auto px-6 py-10">
-        @yield('content')
-    </main>
+    {{-- Truyện nổi bật (fake data) --}}
+    <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">🔥 Truyện nổi bật</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            @for ($i = 1; $i <= 10; $i++)
+                <a href="#" class="block bg-white rounded-lg shadow hover:shadow-lg transition">
+                    <img src="https://placehold.co/300x400?text=Truyen+{{ $i }}" alt="Truyện {{ $i }}" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-3">
+                        <h3 class="font-semibold text-gray-800 text-sm line-clamp-2">Truyện {{ $i }} - Tiêu đề mẫu</h3>
+                        <p class="text-xs text-gray-500 mt-1">Tác giả {{ $i }}</p>
+                    </div>
+                </a>
+            @endfor
+        </div>
+    </section>
 
-    {{-- Footer --}}
-    <footer class="bg-white border-t mt-10 py-4 text-center text-gray-500 text-sm">
-        © {{ date('Y') }} Web Truyện. All rights reserved.
-    </footer>
-
-</body>
-</html>
+    {{-- Truyện mới cập nhật (fake data) --}}
+    <section>
+        <h2 class="text-xl font-semibold mb-4">📚 Truyện mới cập nhật</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            @for ($i = 1; $i <= 6; $i++)
+                <div class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+                    <a href="#" class="block">
+                        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600">Truyện mới {{ $i }}</h3>
+                        <p class="text-sm text-gray-500">Tác giả {{ $i }}</p>
+                        <p class="mt-2 text-sm text-gray-600 line-clamp-3">
+                            Đây là mô tả ngắn cho truyện {{ $i }}. Nội dung mẫu giúp bạn xem giao diện hiển thị khi chưa có dữ liệu thật.
+                        </p>
+                    </a>
+                </div>
+            @endfor
+        </div>
+    </section>
+@endsection
