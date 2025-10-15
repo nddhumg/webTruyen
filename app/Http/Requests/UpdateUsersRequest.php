@@ -6,24 +6,27 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUsersRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
+{
+    return [
+        'name' => 'required|string|max:255',
+        'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp',
+    ];
+}
+
+
+    public function messages(): array
     {
-         return [
-            'name' => 'required|string|max:20',
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        return [
+            'name.required' => 'Vui lòng nhập tên của bạn.',
+            'avatar.image' => 'File tải lên phải là hình ảnh.',
+            'avatar.mimes' => 'Ảnh chỉ được định dạng jpg, jpeg, png hoặc gif.',
+            'avatar.max' => 'Kích thước ảnh không vượt quá 2MB.',
         ];
     }
 }

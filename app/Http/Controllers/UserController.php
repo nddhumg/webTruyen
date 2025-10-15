@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -17,34 +18,28 @@ class UserController extends Controller
         return view('app_pages.user.account_info');
     }
 
-    public function update(UpdateUsersRequest $request)
-    {
-        $user = auth()->user();
+   public function update(UpdateUsersRequest $request)
+{
+    $user = auth()->user();
 
-        // Cập nhật thông tin cơ bản
-        $user->name = $request->name;
-        $user->email = $request->email;
+    $user->name = $request->name;
 
-        // Nếu có upload ảnh đại diện
-        if ($request->hasFile('avatar')) {
-            // // Xóa ảnh cũ nếu có
-            // if ($user->avatar && file_exists(public_path('uploads/avatars/'.$user->avatar))) {
-            //     unlink(public_path('uploads/avatars/'.$user->avatar));
-            // }
+    // Nếu có upload file
+    if ($request->hasFile('avatar')) {
+        $file = $request->file('avatar');
+        $filename = time() . '_' . $file->getClientOriginalName();
 
-            // // Lưu ảnh mới
-            // $file = $request->file('avatar');
-            // $filename = time().'_'.$file->getClientOriginalName();
-            // $file->move(public_path('uploads/avatars'), $filename);
-            $photoPath = $request->file('avatar')->store('photos','public');
-            $user->avatar = $photoPath;
-        }
+        // Lưu file vào storage/app/public/avatars
+        $file->storeAs('avatars', $filename, 'public');
 
-        // Lưu thay đổi
-        $user->save();
-
-        return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
+        // Cập nhật đường dẫn trong DB (chỉ lưu 'avatars/...')
+        $user->avatar = 'avatars/' . $filename;
     }
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
+}
 
     public function register(CreateUserRequest $request)
     {
@@ -63,7 +58,6 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->intended('/');
         }
 

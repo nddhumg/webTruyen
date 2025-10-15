@@ -13,12 +13,12 @@ Route::get('/register', [HomeController::class, 'register'])->name('register');
 
 Route::middleware([isLogin::class])
     ->prefix('users')
-    ->controller(UserController::class)
     ->name('users.')
-    ->group(function() {
+    ->controller(UserController::class)
+    ->group(function () {
         Route::get('/info', 'showInfo')->name('info');
-        Route::get('/logout', 'logout')->name('logout');
         Route::post('/update', 'update')->name('update');
+        Route::get('/logout', 'logout')->name('logout');
     });
 Route::controller(UserController::class)->group(function() {
     Route::post('/register', 'register')->name('register');
