@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const html = document.documentElement;
 
     if (!checkbox) {
-        console.warn("Checkbox not found ❌");
+        console.log("Checkbox not found ❌");
         return;
     }
 

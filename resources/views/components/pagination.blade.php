@@ -1,7 +1,7 @@
 <div class="flex justify-center mt-6 space-x-2">
     <!-- Previous -->
     <a href="#" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md">
-        << /a>
+    <</a>
 
             <!-- Pages -->
             <a href="#" class="px-3 py-1 bg-blue-500 text-white rounded-md">1</a>

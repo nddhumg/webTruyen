@@ -11,5 +11,11 @@ class HomeController extends Controller
         return view('app_pages.home.index'); // Trả về view resources/views/home.blade.php
     }
 
-   
+   public function login(){
+        return view('app_pages.user.login');
+   }
+
+   public function register(){
+        return view('app_pages.user.register');
+   }
 }
