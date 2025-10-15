@@ -1,42 +1,26 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'WebTruyen')</title>
-
-    {{-- Favicon --}}
-    {{-- <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}"> --}}
-
-    {{-- Tailwind CSS / Bootstrap --}}
-    @vite('resources/css/app.css') {{-- hoặc link CDN nếu không dùng Vite --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet"> --}}
-
-    {{-- Custom CSS --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
-
-    @stack('head')
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
-<body class="bg-gray-100 font-sans text-gray-800">
 
+<body class="bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-white px-4">
     {{-- Header --}}
-    {{-- @include('partials.app.app_header') --}}
+    @include('blocks.header')
 
     {{-- Navbar --}}
-    {{-- @include('partials.app.app_navbar') --}}
+    @include('blocks.navbar')
 
-    {{-- Main Content --}}
+    {{-- Main --}}
     <main class="container mx-auto px-4 py-6 min-h-screen">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    {{-- @include('partials.app.app_footer') --}}
+    @include('blocks.footer')
 
-    {{-- Scripts --}}
-    @vite('resources/js/app.js')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> --}}
-    @stack('scripts')
 
 </body>
 </html>

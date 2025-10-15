@@ -3,45 +3,101 @@
 @section('title', 'Trang chủ - WebTruyen')
 
 @section('content')
-    {{-- Banner / Slider --}}
-    <section class="mb-6">
-        <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl p-8 text-white text-center shadow">
-            <h1 class="text-3xl font-bold mb-2">Chào mừng đến với WebTruyen</h1>
-            <p class="text-lg">Đọc truyện online miễn phí – cập nhật nhanh nhất!</p>
-        </div>
-    </section>
+    @include('blocks.slide')
 
-    {{-- Truyện nổi bật (fake data) --}}
-    <section class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">🔥 Truyện nổi bật</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            @for ($i = 1; $i <= 10; $i++)
-                <a href="#" class="block bg-white rounded-lg shadow hover:shadow-lg transition">
-                    <img src="https://placehold.co/300x400?text=Truyen+{{ $i }}" alt="Truyện {{ $i }}" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-3">
-                        <h3 class="font-semibold text-gray-800 text-sm line-clamp-2">Truyện {{ $i }} - Tiêu đề mẫu</h3>
-                        <p class="text-xs text-gray-500 mt-1">Tác giả {{ $i }}</p>
+    {{-- Truyện mới cập nhật --}}
+    <section class="mt-8">
+        <h2 class="text-xl font-semibold ">📚 Truyện mới cập nhật</h2>
+
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <!-- Card Truyện 1 -->
+                <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                    <div class="relative">
+                        <img src="https://s2.anhvip.xyz/comics/thien-tai-phep-thuat-nam-giu-khai-niem.jpg"
+                            alt="Thiên Tài Phép Thuật Nắm Giữ Khái Niệm"
+                            class="w-full h-60 object-cover rounded-t-2xl">
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs rounded-lg px-2 py-1 flex gap-2">
+                            <span>👁️ 6.6K</span>
+                            <span>💬 6</span>
+                            <span>❤️ 252</span>
+                        </div>
                     </div>
-                </a>
-            @endfor
-        </div>
-    </section>
-
-    {{-- Truyện mới cập nhật (fake data) --}}
-    <section>
-        <h2 class="text-xl font-semibold mb-4">📚 Truyện mới cập nhật</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @for ($i = 1; $i <= 6; $i++)
-                <div class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-                    <a href="#" class="block">
-                        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600">Truyện mới {{ $i }}</h3>
-                        <p class="text-sm text-gray-500">Tác giả {{ $i }}</p>
-                        <p class="mt-2 text-sm text-gray-600 line-clamp-3">
-                            Đây là mô tả ngắn cho truyện {{ $i }}. Nội dung mẫu giúp bạn xem giao diện hiển thị khi chưa có dữ liệu thật.
-                        </p>
-                    </a>
+                    <div class="p-3 pt-2">
+                        <h2 class="font-semibold text-lg hover:text-blue-600 truncate">
+                            <a href="#">Thiên Tài Phép Thuật Nắm Giữ Khái Niệm</a>
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-1">Thể loại: Action, Fantasy</p>
+                        <p class="text-sm text-gray-500">Chương mới nhất: <a href="#" class="text-blue-500">Chapter 112</a></p>
+                    </div>
                 </div>
-            @endfor
+
+                <!-- Card Truyện 2 -->
+                <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                    <div class="relative">
+                        <img src="https://s2.anhvip.xyz/comics/con-trai-ut-cua-dai-phap-su-lung-danh.jpg"
+                            alt="Con Trai Út Của Đại Pháp Sư Lừng Danh"
+                            class="w-full h-60 object-cover rounded-t-2xl">
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs rounded-lg px-2 py-1 flex gap-2">
+                            <span>👁️ 98.8K</span>
+                            <span>💬 9</span>
+                            <span>❤️ 818</span>
+                        </div>
+                    </div>
+                    <div class="p-3 pt-2">
+                        <h2 class="font-semibold text-lg hover:text-blue-600 truncate">
+                            <a href="#">Con Trai Út Của Đại Pháp Sư Lừng Danh</a>
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-1">Thể loại: Action, Manhwa, Fantasy</p>
+                        <p class="text-sm text-gray-500">Chương mới nhất: <a href="#" class="text-blue-500">Chapter 98</a></p>
+                    </div>
+                </div>
+
+                <!-- Card Truyện 3 -->
+                <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                    <div class="relative">
+                        <img src="https://s2.anhvip.xyz/comics/con-trai-ut-cua-dai-phap-su-lung-danh.jpg"
+                            alt="Con Trai Út Của Đại Pháp Sư Lừng Danh"
+                            class="w-full h-60 object-cover rounded-t-2xl">
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs rounded-lg px-2 py-1 flex gap-2">
+                            <span>👁️ 98.8K</span>
+                            <span>💬 9</span>
+                            <span>❤️ 818</span>
+                        </div>
+                    </div>
+                    <div class="p-3 pt-2">
+                        <h2 class="font-semibold text-lg hover:text-blue-600 truncate">
+                            <a href="#">Con Trai Út Của Đại Pháp Sư Lừng Danh</a>
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-1">Thể loại: Action, Manhwa, Fantasy</p>
+                        <p class="text-sm text-gray-500">Chương mới nhất: <a href="#" class="text-blue-500">Chapter 98</a></p>
+                    </div>
+                </div>
+
+                <!-- Card Truyện 4 -->
+                <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+                    <div class="relative">
+                        <img src="https://s2.anhvip.xyz/comics/con-trai-ut-cua-dai-phap-su-lung-danh.jpg"
+                            alt="Con Trai Út Của Đại Pháp Sư Lừng Danh"
+                            class="w-full h-60 object-cover rounded-t-2xl">
+                        <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs rounded-lg px-2 py-1 flex gap-2">
+                            <span>👁️ 98.8K</span>
+                            <span>💬 9</span>
+                            <span>❤️ 818</span>
+                        </div>
+                    </div>
+                    <div class="p-3 pt-2">
+                        <h2 class="font-semibold text-lg hover:text-blue-600 truncate">
+                            <a href="#">Con Trai Út Của Đại Pháp Sư Lừng Danh</a>
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-1">Thể loại: Action, Manhwa, Fantasy</p>
+                        <p class="text-sm text-gray-500">Chương mới nhất: <a href="#" class="text-blue-500">Chapter 98</a></p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
+    <x-pagination></x-pagination>
 @endsection
