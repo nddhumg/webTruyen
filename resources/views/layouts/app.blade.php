@@ -6,7 +6,7 @@
     @vite('resources/js/app.js')
 </head>
 
-<body class="bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-white px-4">
+<body class="bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-white" id="app">
     {{-- Header --}}
     @include('blocks.header')
 

@@ -25,4 +25,10 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/login', 'login')->name('login');
 });
 
+Route::get('/truyen/{slug}', [ComicController::class, 'show'])->name('comic.show');
+
+Route::get('/test', function () {
+    return view('app_pages.story.story_main');
+});
+
 

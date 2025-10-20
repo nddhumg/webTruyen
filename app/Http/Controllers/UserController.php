@@ -18,28 +18,28 @@ class UserController extends Controller
         return view('app_pages.user.account_info');
     }
 
-   public function update(UpdateUsersRequest $request)
-{
-    $user = auth()->user();
+    public function update(UpdateUsersRequest $request)
+    {
+        $user = auth()->user();
 
-    $user->name = $request->name;
+        $user->name = $request->name;
 
-    // Nếu có upload file
-    if ($request->hasFile('avatar')) {
-        $file = $request->file('avatar');
-        $filename = time() . '_' . $file->getClientOriginalName();
+        // Nếu có upload file
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = time().'_'.$file->getClientOriginalName();
 
-        // Lưu file vào storage/app/public/avatars
-        $file->storeAs('avatars', $filename, 'public');
+            // Lưu file vào storage/app/public/avatars
+            $file->storeAs('avatars', $filename, 'public');
 
-        // Cập nhật đường dẫn trong DB (chỉ lưu 'avatars/...')
-        $user->avatar = 'avatars/' . $filename;
+            // Cập nhật đường dẫn trong DB (chỉ lưu 'avatars/...')
+            $user->avatar = 'avatars/'.$filename;
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
     }
-
-    $user->save();
-
-    return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
-}
 
     public function register(CreateUserRequest $request)
     {
@@ -56,8 +56,9 @@ class UserController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials,$request->input('remember',false) )) {
             $request->session()->regenerate();
+
             return redirect()->intended('/');
         }
 

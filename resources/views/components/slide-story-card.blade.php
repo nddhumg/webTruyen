@@ -1,4 +1,5 @@
 <div class="slide-item flex-shrink-0 rounded-xl overflow-hidden shadow-lg relative">
+    <button >
     <img src="https://s2.anhvip.xyz/comics/thien-tai-phep-thuat-nam-giu-khai-niem.jpg"
          class="w-full aspect-[4/3] object-cover">
 
@@ -11,4 +12,5 @@
             <span><i class="fa fa-history"></i> 3 ngày trước</span>
         </div>
     </div>
+    </button>
 </div>
