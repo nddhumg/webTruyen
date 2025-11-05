@@ -39,12 +39,18 @@
                 <div id="dropdownMenu"
                     class="absolute z-10 mt-1 w-full bg-white border rounded-lg shadow-lg hidden max-h-60 overflow-auto">
                     <div class="grid grid-cols-2 gap-2 p-2">
-                        @foreach ($genres as $genre)
-                            <div class="truncate px-2 py-1 hover:bg-indigo-100 rounded cursor-pointer"
-                                data-value="{{ $genre->id }}">
-                                {{ $genre->name }}
+                        @if (count($genres) != 0)
+                            @foreach ($genres as $genre)
+                                <div class="truncate px-2 py-1 hover:bg-indigo-100 rounded cursor-pointer"
+                                    data-value="{{ $genre->id }}">
+                                    {{ $genre->name }}
+                                </div>
+                            @endforeach
+                        @else
+                            <div>
+                                Chưa có thể loại nào
                             </div>
-                        @endforeach
+                        @endif
                     </div>
                 </div>
 

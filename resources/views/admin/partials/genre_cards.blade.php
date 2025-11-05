@@ -18,7 +18,6 @@
 
             <!-- Phần hành động -->
             <div class="mt-auto pt-3 border-t border-gray-200 flex items-center justify-between text-sm font-medium">
-                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">Xem chi tiết</a>
                 <form action="{{ route('admin.genre.destroy', ['theloai' => $genre->id]) }}" method="POST"
                     onsubmit="return confirm('Bạn có chắc muốn xóa không?')">
                     @csrf

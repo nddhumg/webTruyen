@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comic;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $commics = Comic::all();
         return view('app_pages.home.index'); // Trả về view resources/views/home.blade.php
     }
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commics;
-use App\Models\Genres;
+use App\Models\Comic;
+use App\Models\Genre;
 use App\Models\User;
 
 class DashboardController extends Controller
@@ -16,8 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         $countUser = User::count();
-        $countComic = Commics::count();
-        $countGenre = Genres::count();
+        $countComic = Comic::count();
+        $countGenre = Genre::count();
 
         return view('admin::dashboard', [
             'countUser' => $countUser,

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genres extends Model
+class Genre extends Model
 {
     use HasFactory;
 
@@ -19,6 +19,6 @@ class Genres extends Model
 
     public function stories()
     {
-        return $this->belongsToMany(Commics::class, 'genre_commic', 'genre_id', 'commic_id');
+        return $this->belongsToMany(Comic::class, 'genre_commic', 'genre_id', 'commic_id');
     }
 }

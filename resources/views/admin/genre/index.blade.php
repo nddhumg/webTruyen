@@ -49,23 +49,6 @@
 
                     <input value="{{ old('name') }}" type="text" name="name" id="name"
                         placeholder="Tên thể loại" class="border rounded w-full p-2 mb-3">
-
-                    <textarea name="description" id="description" placeholder="Mô tả" rows="4"
-                        class="border rounded w-full p-2 mb-3 resize-none">{{ old('description') }}</textarea>
-
-                    <!-- Checkbox -->
-                    <label class="flex items-center cursor-pointer space-x-3 mb-3">
-                        <div class="relative">
-                            <input type="checkbox" name="is_hot" class="sr-only peer" {{ old('is_hot') ? 'checked' : '' }}>
-                            <div class="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-red-500 transition"></div>
-                            <div
-                                class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition peer-checked:translate-x-5">
-                            </div>
-                        </div>
-                        <span class="text-red-500 font-semibold">HOT</span>
-                    </label>
-
-
                     <!-- Nút submit -->
                     <button class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600" type="submit">
                         Thêm

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCommicRequest;
-use App\Models\Commics;
-use App\Models\Genres;
+use App\Models\Comic;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class CommicsController extends Controller
@@ -16,30 +16,30 @@ class CommicsController extends Controller
 
     public function index(Request $request)
     {
-        $commics = Commics::with('genres')->get();
-        $genres = Genres::all();
+        $commics = Comic::with('genres')->get();
+        $genres = Genre::all();
 
         return view('adminCommic::index', ['commics' => $commics, 'genres' => $genres]);
     }
 
     public function edit(Request $request, $id)
     {
-        $comic = Commics::with('genres')->findOrFail($id);
-        $genres = Genres::all();
+        $comic = Comic::with('genres')->findOrFail($id);
+        $genres = Genre::all();
 
         return view('adminCommic::edit', ['comic' => $comic, 'genres' => $genres]);
     }
 
     public function create(Request $request)
     {
-        $genres = Genres::all();
+        $genres = Genre::all();
 
         return view('adminCommic::create', ['genres' => $genres]);
     }
 
     public function store(CreateCommicRequest $request)
     {
-        $commic = Commics::create([
+        $commic = Comic::create([
             'title' => $request->title,
             'author' => $request->author,
             'description' => $request->description,
@@ -59,7 +59,7 @@ class CommicsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $comic = Commics::findOrFail($id);
+        $comic = Comic::findOrFail($id);
 
         // 2. Cập nhật các trường cơ bản
         $comic->title = $request->input('title');

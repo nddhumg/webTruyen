@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGenreRequest;
-use App\Models\Genres;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class GenresController extends Controller
@@ -15,25 +15,23 @@ class GenresController extends Controller
 
     public function index(Request $request)
     {
-        $genres = Genres::all();
+        $genres = Genre::all();
         return view('adminGenre::index', ['genres' => $genres]);
     }
 
     public function store(CreateGenreRequest $request)
     {
-        Genres::create([
+        Genre::create([
             'name' => $request->name,
-            'description' => $request->description,
-            'is_hot' => $request->has('is_hot') ? 1 : 0,
         ]);
-        $genres = Genres::all();
+        $genres = Genre::all();
 
         return redirect()->route('admin.genre.index')->with('success', 'Thể loại đã được tạo!');
     }
 
     public function search(Request $request)
     {
-        $query = Genres::query();
+        $query = Genre::query();
 
         if ($search = $request->input('q')) {
             $query->where('name', 'like', "%{$search}%");
@@ -46,7 +44,7 @@ class GenresController extends Controller
 
     public function destroy($id)
     {
-        $genre = Genres::findOrFail($id);
+        $genre = Genre::findOrFail($id);
         $genre->delete();
 
         return redirect()->route('admin.genre.index')->with('success', 'Đã xóa thể loại thành công!');
