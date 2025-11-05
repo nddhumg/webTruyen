@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CommicsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GenresController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isLogin;
+use Illuminate\Support\Facades\Route;
 
 // ==================== HOME ====================
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -20,15 +23,29 @@ Route::middleware([isLogin::class])
         Route::post('/update', 'update')->name('update');
         Route::get('/logout', 'logout')->name('logout');
     });
-Route::controller(UserController::class)->group(function() {
+Route::controller(UserController::class)->group(function () {
     Route::post('/register', 'register')->name('register');
     Route::post('/login', 'login')->name('login');
 });
 
-Route::get('/truyen/{slug}', [ComicController::class, 'show'])->name('comic.show');
+// Route::get('/truyen/{slug}', [ComicController::class, 'show'])->name('comic.show');
 
 Route::get('/test', function () {
     return view('app_pages.story.story_main');
 });
 
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::resource('truyen', CommicsController::class)->names('commic');
 
+        Route::resource('theloai', GenresController::class)->names('genre');
+        Route::prefix('theloai')
+            ->name('genre.')
+            ->controller(GenresController::class)
+            ->group(function () {
+                Route::get('/search', 'search')->name('search');
+            });
+    Route::resource('nguoidung', UserController::class)->names('user');
+    });

@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('adminUser::index',['currentPage' =>'user','users' => $users]);
+    }
+
     public function showInfo()
     {
         return view('app_pages.user.account_info');
@@ -48,6 +54,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         return redirect('/')->with('success', 'Tài khoản đã được tạo!');
     }
@@ -56,7 +63,7 @@ class UserController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials,$request->input('remember',false) )) {
+        if (Auth::attempt($credentials, $request->input('remember', false))) {
             $request->session()->regenerate();
 
             return redirect()->intended('/');
