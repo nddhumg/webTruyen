@@ -9,7 +9,7 @@ class Comic extends Model
 {
     use HasFactory;
 
-    protected $table = 'commics';
+    protected $table = 'comics';
 
     protected $fillable = [
         'title',
@@ -20,6 +20,11 @@ class Comic extends Model
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'genre_commic', 'commic_id', 'genre_id');
+        return $this->belongsToMany(Genre::class, 'genre_comic', 'comic_id', 'genre_id');
+    }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class, 'comic_id', 'id');
     }
 }

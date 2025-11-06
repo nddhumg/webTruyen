@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CommicsController;
+use App\Http\Controllers\ComicsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\HomeController;
@@ -38,7 +38,7 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
-        Route::resource('truyen', CommicsController::class)->names('commic');
+        Route::resource('truyen', ComicsController::class)->names('comic');
 
         Route::resource('theloai', GenresController::class)->names('genre');
         Route::prefix('theloai')

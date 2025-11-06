@@ -13,12 +13,10 @@ class Genre extends Model
 
     protected $fillable = [
         'name',
-        'description',
-        'is_hot',
     ];
 
-    public function stories()
+    public function comics()
     {
-        return $this->belongsToMany(Comic::class, 'genre_commic', 'genre_id', 'commic_id');
+        return $this->belongsToMany(Comic::class, 'genre_comic', 'genre_id', 'comic_id');
     }
 }

@@ -9,7 +9,7 @@
 @section('content')
     <div class=" p-8 w-full ">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Tạo truyện mới</h1>
-        <form action="{{ route('admin.commic.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ route('admin.comic.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <!-- Tên truyện -->
             <div>

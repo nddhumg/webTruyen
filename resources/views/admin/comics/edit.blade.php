@@ -9,7 +9,7 @@
 @section('content')
     <div class=" p-8 w-full ">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Sửa truyện</h1>
-        <form action="{{ route('admin.commic.update', $comic->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{ route('admin.comic.update', $comic->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             @method('PUT')
              <input value='@json($comic->genres)' type="text" id="comic" class="hidden">

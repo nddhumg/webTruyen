@@ -8,19 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('genre_commic', function (Blueprint $table) {
+        Schema::create('genre_comic', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('commic_id');
+            $table->unsignedInteger('comic_id');
             $table->unsignedInteger('genre_id');
             $table->timestamps();
 
-            $table->foreign('commic_id')->references('id')->on('commics')->onDelete('cascade');
+            $table->foreign('comic_id')->references('id')->on('comics')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('genre_commic');
+        Schema::dropIfExists('genre_comic');
     }
 };

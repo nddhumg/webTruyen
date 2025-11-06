@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCommicRequest;
+use App\Http\Requests\CreateComicRequest;
 use App\Models\Comic;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class CommicsController extends Controller
+class ComicsController extends Controller
 {
     public function __construct()
     {
-        view()->share('currentPage', 'commic');
+        view()->share('currentPage', 'comic');
     }
 
     public function index(Request $request)
     {
-        $commics = Comic::with('genres')->get();
+        $comics = Comic::with('genres')->get();
         $genres = Genre::all();
 
-        return view('adminCommic::index', ['commics' => $commics, 'genres' => $genres]);
+        return view('adminComic::index', ['comics' => $comics, 'genres' => $genres]);
     }
 
     public function edit(Request $request, $id)
@@ -27,19 +27,19 @@ class CommicsController extends Controller
         $comic = Comic::with('genres')->findOrFail($id);
         $genres = Genre::all();
 
-        return view('adminCommic::edit', ['comic' => $comic, 'genres' => $genres]);
+        return view('adminComic::edit', ['comic' => $comic, 'genres' => $genres]);
     }
 
     public function create(Request $request)
     {
         $genres = Genre::all();
 
-        return view('adminCommic::create', ['genres' => $genres]);
+        return view('adminComic::create', ['genres' => $genres]);
     }
 
-    public function store(CreateCommicRequest $request)
+    public function store(CreateComicRequest $request)
     {
-        $commic = Comic::create([
+        $comic = Comic::create([
             'title' => $request->title,
             'author' => $request->author,
             'description' => $request->description,
@@ -52,9 +52,9 @@ class CommicsController extends Controller
         }
         $genres = array_map('trim', $genres);
         $genres = array_map('intval', $genres);
-        $commic->genres()->attach($genres);
+        $comic->genres()->attach($genres);
 
-        return redirect()->route('admin.commic.index')->with('success', 'Truyện đã được tạo!');
+        return redirect()->route('admin.comic.index')->with('success', 'Truyện đã được tạo!');
     }
 
     public function update(Request $request, $id)
@@ -68,11 +68,11 @@ class CommicsController extends Controller
         $comic->save();
 
         if ($request->has('genres')) {
-            $genre_commics = $this->changeToArray($request->input('genres'));
-            $comic->genres()->sync( $genre_commics);
+            $genre_comics = $this->changeToArray($request->input('genres'));
+            $comic->genres()->sync( $genre_comics);
         }
 
-        return redirect()->route('admin.commic.index')->with('success', 'Truyện đã được sửa!');
+        return redirect()->route('admin.comic.index')->with('success', 'Truyện đã được sửa!');
     }
 
     private function changeToArray($object)

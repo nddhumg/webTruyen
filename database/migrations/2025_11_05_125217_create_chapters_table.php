@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->increments('id'); // INT UNSIGNED
-            $table->unsignedInteger('commic_id'); // match commics.id
+            $table->unsignedInteger('comic_id');
             $table->integer('chapter_number');
             $table->timestamps();
 
-            $table->foreign('commic_id')->references('id')->on('commics')->onDelete('cascade');
+            $table->foreign('comic_id')->references('id')->on('comics')->onDelete('cascade');
         });
 
     }

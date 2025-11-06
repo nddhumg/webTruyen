@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::addNamespace('admin', resource_path('views/admin'));
-        View::addNamespace('adminCommic', resource_path('views/admin/commics'));
+        View::addNamespace('adminComic', resource_path('views/admin/comics'));
         View::addNamespace('adminUser', resource_path('views/admin/user'));
         View::addNamespace('adminGenre', resource_path('views/admin/genre'));
     }

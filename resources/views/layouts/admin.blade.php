@@ -40,8 +40,8 @@
                         <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
-                <li class="relative nav-menu " id="nav-menu-commic">
-                    <a href="{{ route('admin.commic.index') }}"
+                <li class="relative nav-menu " id="nav-menu-comic">
+                    <a href="{{ route('admin.comic.index') }}"
                         class="toggle-nav-content nav-link flex items-center p-2 text-gray-900 dark:text-white group">
                         <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -54,7 +54,7 @@
                             class="inline-  flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                     </a>
                     <div class="nav-submenu hidden ps-5 flex flex-col">
-                        <a href="{{ route('admin.commic.create') }}" class="nav-link">Thêm</a>
+                        <a href="{{ route('admin.comic.create') }}" class="nav-link">Thêm</a>
                     </div>
                 </li>
                 <li class="relative nav-menu " id="nav-menu-genre">

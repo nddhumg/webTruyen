@@ -9,46 +9,62 @@
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-6">Danh sách truyện</h1>
 
-        @if ($commics->count())
+        @if ($comics->count())
             <div class="overflow-x-auto">
-                <table class="w-full table-auto border-collapse">
+                <table class="table-auto border-collapse w-full">
                     <colgroup>
-                        <col class="w-[20px]" />
-                        <col class="w-[100px]" />
-                        <col class="w-[100px]" />
-                        <col class="w-[130px]" />
-                        <col class="w-[80px]" />
-                        <col class="w-[10px]" />
+                        <col style="width: 40px" />
+                        <col style="width: 200px" />
+                        <col style="width: 150px" />
+                        <col style="width: 150px" />
+                        <col style="width: 300px" />
+                        <col style="width: 85px" />
+                        <col style="width: 120px" />
                     </colgroup>
                     <thead>
-                        <tr class="text-left bg-gray-50">
-                            <th class="p-3 border">#</th>
-                            <th class="p-3 border">Tên</th>
-                            <th class="p-3 border">Tác giả</th>
-                            <th class="p-3 border">Thể loại</th>
-                            <th class="p-3 border">Mô tả</th>
-                            <th class="p-3 border">Hành động</th>
+                        <tr class="text-left bg-gray-50 ">
+                            <th class="p-3 border text-center">#</th>
+                            <th class="p-3 border text-center">Tên</th>
+                            <th class="p-3 border text-center">Tác giả</th>
+                            <th class="p-3 border text-center">Thể loại</th>
+                            <th class="p-3 border text-center">Mô tả</th>
+                            <th class="p-3 border text-center">Chap mới nhất</th>
+                            <th class="p-3 border text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        @foreach ($commics as $commic)
+                        @foreach ($comics as $comic)
                             <tr>
-                                <td class="p-3 border">{{ $commic['id'] }}</td>
-                                <td class="p-3 border">{{ $commic['title'] }}</td>
-                                <td class="p-3 border">{{ $commic['author'] }}</td>
+                                <td class="p-3 border">{{ $comic['id'] }}</td>
+                                <td class="p-3 border">{{ $comic['title'] }}</td>
+                                <td class="p-3 border">{{ $comic['author'] }}</td>
                                 <td class="p-3 border">
-                                    @foreach ($commic->genres as $genre)
+                                    @foreach ($comic->genres as $genre)
                                         <span
                                             class="inline-block bg-gray-200 rounded px-2 py-1 text-sm">{{ Str::limit($genre->name, 10, '...') }}</span>
                                     @endforeach
                                 </td>
-                                <td class="p-3 border">{{ $commic['description'] }}</td>
+                                <td class="p-3 border">{{ $comic['description'] }}</td>
+                                <td class="p-3 border">{{ $comic['author'] }}</td>
                                 <td class="p-3 border">
-                                    <button data-url="{{ route('admin.commic.edit', $commic->id) }}"
-                                        class="hover:bg-blue-600 editBtn px-2 py-1 border rounded mr-1">Sửa</button>
-                                    <button data-id="{{ $commic->id }}"
-                                        class="deleteBtn px-2 py-1 border rounded text-red-600">Xóa</button>
+                                    <div class="flex grid grid-cols-2 items-center gap-2">
+                                        <button data-url="{{ route('admin.comic.edit', $comic->id) }}"
+                                            class="addBtn col-span-2  px-3 py-1 rounded bg-blue-500 text-white border border-blue-600 hover:bg-blue-600 hover:shadow transition-all">
+                                            Thêm chap
+                                        </button>
+
+                                        <button data-url="{{ route('admin.comic.edit', $comic->id) }}"
+                                            class="editBtn px-3 py-1 rounded bg-yellow-200 text-yellow-700 border border-yellow-500 hover:bg-yellow-300 hover:shadow transition-all">
+                                            Sửa
+                                        </button>
+
+                                        <button data-id="{{ $comic->id }}"
+                                            class="deleteBtn px-3 py-1 rounded bg-red-600 text-white border border-red-700 hover:bg-red-700 hover:shadow transition-all">
+                                            Xóa
+                                        </button>
+                                    </div>
                                 </td>
+
                             </tr>
                         @endforeach
 
