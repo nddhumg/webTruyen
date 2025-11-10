@@ -41,11 +41,6 @@ Route::prefix('admin')
         Route::resource('truyen', ComicsController::class)->names('comic');
 
         Route::resource('theloai', GenresController::class)->names('genre');
-        Route::prefix('theloai')
-            ->name('genre.')
-            ->controller(GenresController::class)
-            ->group(function () {
-                Route::get('/search', 'search')->name('search');
-            });
-    Route::resource('nguoidung', UserController::class)->names('user');
+        Route::get('theloai/search', [GenresController::class, 'search'])->name('genre.search');
+        Route::resource('nguoidung', UserController::class)->names('user');
     });

@@ -49,7 +49,7 @@
                 <div class="relative group z-50 ">
                     <button class="flex items-center space-x-2 text-gray-700 dark:text-gray-200 cursor-pointer"
                         id ="userMenuBtn">
-                        <img src="https://www.toptruyentv11.com/images/users/anonymous.png"
+                        <img src=" {{ asset('img/user.png') }}"
                             class="h-8 w-8 rounded-full borqder">
                         <span>{{ Auth::user()?->name }}</span>
                         <i class="fa fa-caret-down"></i>

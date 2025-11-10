@@ -3,7 +3,8 @@ const inputName = document.getElementById('inputName');
 const inputAuthor = document.getElementById('inputAuthor');
 const inputId = document.getElementById('inputId');
 const editPopup = document.getElementById('editPopup');
-
+let idDelete = -1;
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.editBtn').forEach(btn => {
         btn.addEventListener('click', e => {
@@ -14,7 +15,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.deleteBtn').forEach(btn => {
         btn.addEventListener('click', e => {
-
+            modalOverlay.classList.remove('hidden');
+            deleteUrl = btn.dataset.url;
+            idDelete = btn.dataset.id;
+        });
+    });
+    document.querySelectorAll('.comicBtn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            // const url = btn.dataset.url;
         });
     });
 });
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalBox = document.getElementById('modalBox');
+const cancelBtn = document.getElementById('cancelBtn');
+const deleteBtn = document.getElementById('deleteBtn');
+let deleteUrl;
+cancelBtn.addEventListener('click', () => {
+    modalOverlay.classList.add('hidden');
+});
+
+// Ấn ra ngoài thì đóng
+modalOverlay.addEventListener('click', (e) => {
+    if (!modalBox.contains(e.target)) {
+        modalOverlay.classList.add('hidden');
+    }
+});
+
+deleteBtn.addEventListener('click', () => {
+    fetch(deleteUrl, {
+        method: "DELETE",
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+            "Accept": "application/json"
+        }
+    })
+});
+
+

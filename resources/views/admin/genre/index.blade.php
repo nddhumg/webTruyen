@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Thể loại')
 
-@section('vite_js')
+@section('head')
     @vite('resources/js/admin/theloai/index.js')
 @endsection
 

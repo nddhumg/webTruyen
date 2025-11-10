@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Người dùng')
-@section('vite_js')
+@section('head')
     @vite('resources/js/admin/user/index.js')
 @endsection
 @section('content')

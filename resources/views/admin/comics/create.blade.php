@@ -2,7 +2,7 @@
 
 @section('title', 'Truyện')
 
-@section('vite_js')
+@section('head')
     @vite('resources/js/admin/truyen/create.js')
 @endsection
 

@@ -12,7 +12,7 @@
                 <div>
                     <label class="block text-gray-700 dark:text-gray-200 mb-1">Email</label>
                     <div class="relative">
-                        <input  value="{{ old('email') }}" type="email" name="email" placeholder="Email" autofocus
+                        <input value="{{ old('email') }}" type="email" name="email" placeholder="Email" autofocus
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 dark:bg-gray-700 dark:text-gray-100">
                         <i class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
@@ -32,18 +32,22 @@
                 @error('password')
                     <div class= "text-red-900">{{ $message }}</div>
                 @enderror
-                <!-- Remember + Submit -->
+                <!-- Remember  -->
                 <div class="flex items-center justify-between mt-4">
                     <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-200">
                         <input type="checkbox" name="remember" class="form-checkbox h-4 w-4 text-yellow-400">
                         <span>Ghi nhớ</span>
                     </label>
 
-                    <button type="submit"
+                    {{-- <button type="submit"
                         class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                         Đăng nhập
-                    </button>
+                    </button> --}}
                 </div>
+                <button type="submit"
+                    class="bg-yellow-400 w-full hover:bg-yellow-500 text-gray-900 font-semibold text-center p-2 rounded-lg">
+                    Đăng nhập
+                </button>
             </form>
 
             <!-- Social login -->

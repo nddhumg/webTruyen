@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 
 @section('title', 'Truyện')
-@section('vite_js')
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/js/admin/truyen/index.js')
 @endsection
 
 @section('content')
-    <div class="container mx-auto py-8">
+    <div class="container mx-auto py-8  h-full">
         <h1 class="text-2xl font-bold mb-6">Danh sách truyện</h1>
 
         @if ($comics->count())
@@ -16,19 +17,17 @@
                         <col style="width: 40px" />
                         <col style="width: 200px" />
                         <col style="width: 150px" />
-                        <col style="width: 150px" />
-                        <col style="width: 300px" />
-                        <col style="width: 85px" />
-                        <col style="width: 120px" />
+                        <col style="width: 100px" />
+                        <col style="width: 100px" />
+                        <col style="width: 140px" />
                     </colgroup>
                     <thead>
                         <tr class="text-left bg-gray-50 ">
                             <th class="p-3 border text-center">#</th>
                             <th class="p-3 border text-center">Tên</th>
-                            <th class="p-3 border text-center">Tác giả</th>
-                            <th class="p-3 border text-center">Thể loại</th>
-                            <th class="p-3 border text-center">Mô tả</th>
+                            <th class="p-3 border text-center">Ảnh bìa</th>
                             <th class="p-3 border text-center">Chap mới nhất</th>
+                            <th class="p-3 border text-center">Ngày cập nhập</th>
                             <th class="p-3 border text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -37,20 +36,28 @@
                             <tr>
                                 <td class="p-3 border">{{ $comic['id'] }}</td>
                                 <td class="p-3 border">{{ $comic['title'] }}</td>
-                                <td class="p-3 border">{{ $comic['author'] }}</td>
-                                <td class="p-3 border">
-                                    @foreach ($comic->genres as $genre)
-                                        <span
-                                            class="inline-block bg-gray-200 rounded px-2 py-1 text-sm">{{ Str::limit($genre->name, 10, '...') }}</span>
-                                    @endforeach
-                                </td>
-                                <td class="p-3 border">{{ $comic['description'] }}</td>
-                                <td class="p-3 border">{{ $comic['author'] }}</td>
+                                <td class="p-3 border text-center">ảnh</td>
+                                @if ($comic->latestChapter)
+                                    <td class="p-3 border text-center">
+                                        {{ $comic->latestChapter->chapter_number }}
+                                    </td>
+                                    <td class="p-3 border text-center">
+                                        {{ $comic->latestChapter->chapter_number->created_at }}
+                                    </td>
+                                @else
+                                    <td class="p-3 border text-center">
+                                        Chưa có chap
+                                    </td>
+                                    <td class="p-3 border text-center">
+                                        Chưa có chap
+                                    </td>
+                                @endif
+
                                 <td class="p-3 border">
                                     <div class="flex grid grid-cols-2 items-center gap-2">
                                         <button data-url="{{ route('admin.comic.edit', $comic->id) }}"
-                                            class="addBtn col-span-2  px-3 py-1 rounded bg-blue-500 text-white border border-blue-600 hover:bg-blue-600 hover:shadow transition-all">
-                                            Thêm chap
+                                            class="comicBtn col-span-2  px-3 py-1 rounded bg-blue-500 text-white border border-blue-600 hover:bg-blue-600 hover:shadow transition-all">
+                                            Chi tiết
                                         </button>
 
                                         <button data-url="{{ route('admin.comic.edit', $comic->id) }}"
@@ -59,6 +66,7 @@
                                         </button>
 
                                         <button data-id="{{ $comic->id }}"
+                                            data-url="{{ route('admin.comic.destroy', $comic->id) }}"
                                             class="deleteBtn px-3 py-1 rounded bg-red-600 text-white border border-red-700 hover:bg-red-700 hover:shadow transition-all">
                                             Xóa
                                         </button>
@@ -67,56 +75,23 @@
 
                             </tr>
                         @endforeach
-
-
                     </tbody>
                 </table>
             </div>
         @else
             <p>Chưa có truyện nào.</p>
         @endif
-        {{-- <div id="editPopup" class="fixed  inset-0 bg-white/70 flex items-center justify-center">
-            <div class="bg-neutral-50 p-6 rounded shadow-lg w-1/2">
-                <h2 class="text-xl mb-4">Sửa thông tin</h2>
-                <form id="editForm" class="flex flex-col gap-3">
-                    <input id="inputId" type="text" name="name" placeholder="Tên" class="hidden" />
-                    <input id="inputName" type="text" name="name" placeholder="Tên" class="border p-2 rounded" />
-                    <input id="inputAuthor" type="text" name="author" placeholder="Tác giả"
-                        class="border p-2 rounded" />
-                    <div>
-                        <div class="w-full h-[45px] rounded-sm border-1 border-gray-950">
 
-                        </div>
-                        <div id="box" class="w-full h-[45px] rounded-b-sm border-1  border-gray-950">
-                            <span class="py-2">Nội dung xuất hiện khi click</span>
-                            <span>Thêm dòng thứ 2</p>
-                        </div>
-                    </div>
-                    <div id="dropdownMenu"
-                        class="absolute z-10 mt-1 w-full bg-white border rounded-lg shadow-lg hidden max-h-60 overflow-auto">
-                        <div class="grid grid-cols-2 gap-2 p-2">
-                            @foreach ($genres as $genre)
-                                <div class="truncate px-2 py-1 hover:bg-indigo-100 rounded cursor-pointer"
-                                    data-value="{{ $genre->id }}">
-                                    {{ $genre->name }}
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div>
-                        <label for="description" class="block mb-1 font-medium text-gray-700">Mô tả</label>
-                        <textarea id="inputDescription" name="description" rows="4" placeholder="Nhập mô tả truyện"
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 max-h-64"></textarea>
-                    </div>
-                    <div class="flex justify-end gap-2 mt-3">
-                        <button type="button" id="closeEdit"
-                            class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Hủy</button>
-                        <button type="submit"
-                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Lưu</button>
-                    </div>
-                </form>
+        <div id="modalOverlay" class="fixed inset-0 bg-black/40 flex items-center hidden justify-center z-50">
+            <div id="modalBox" class="bg-white rounded-lg shadow-lg p-6 w-80">
+                <h2 class="text-lg font-semibold mb-4 text-center">Xác nhận xóa?</h2>
+                <div class="flex justify-center gap-4">
+                    <button id="cancelBtn" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Hủy</button>
+                    <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" id="deleteBtn"
+                        name="submit">Xóa</button>
+                </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 
 @endsection

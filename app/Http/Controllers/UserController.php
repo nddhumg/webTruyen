@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ImageService;
 
 class UserController extends Controller
 {
@@ -33,13 +33,9 @@ class UserController extends Controller
         // Nếu có upload file
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $filename = time().'_'.$file->getClientOriginalName();
+            $path = ImageService::upload($file,'avatars');
 
-            // Lưu file vào storage/app/public/avatars
-            $file->storeAs('avatars', $filename, 'public');
-
-            // Cập nhật đường dẫn trong DB (chỉ lưu 'avatars/...')
-            $user->avatar = 'avatars/'.$filename;
+            $user->avatar = $path;
         }
 
         $user->save();

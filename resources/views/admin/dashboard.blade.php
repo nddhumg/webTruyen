@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Quản lý - Admin Dashboard')
-@section('vite_js')
+@section('head')
     @vite('resources/js/admin/dashboard.js')
 @endsection
 @section('content')

@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comic extends Model
 {
-    use HasFactory;
 
     protected $table = 'comics';
 
@@ -26,5 +24,10 @@ class Comic extends Model
     public function chapters()
     {
         return $this->hasMany(Chapter::class, 'comic_id', 'id');
+    }
+
+    public function latestChapter()
+    {
+        return $this->hasOne(Chapter::class)->latest('chapter_number');
     }
 }
