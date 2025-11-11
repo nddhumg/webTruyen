@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,13 @@
 
 <body class="bg-gradient-to-br from-sky-200 via-cyan-200 to-blue-300">
 
-    
+
 
     <!-- Main Content -->
-  <div class="min-h-screen flex justify-center ">
-    @yield('content')
-</div>
-
+    <div class="min-h-screen flex justify-center ">
+        @yield('content')
+    </div>
+    @stack('scripts')
 </body>
+
 </html>

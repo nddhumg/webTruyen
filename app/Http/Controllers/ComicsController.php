@@ -36,6 +36,16 @@ class ComicsController extends Controller
         return view('adminComic::create', ['genres' => $genres]);
     }
 
+    public function show($id)
+    {
+        $comic = Comic::with('genres')->findOrFail($id);
+
+        // Lấy chapters phân trang
+        $chapters = $comic->chapters()->orderBy('chapter_number', 'desc')->paginate(7);
+
+        return view('adminComic::show', compact('comic', 'chapters'));
+    }
+
     public function createChapter($id) {}
 
     public function store(CreateComicRequest $request)
@@ -82,6 +92,9 @@ class ComicsController extends Controller
     {
         $comic = Comic::findOrFail($id);
         $comic->delete();
+        if (request()->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
 
         return redirect()->route('admin.comic.index')->with('success', 'Đã xóa truyện thành công!');
     }

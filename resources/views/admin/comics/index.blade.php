@@ -13,21 +13,20 @@
         @if ($comics->count())
             <div class="overflow-x-auto">
                 <table class="table-auto border-collapse w-full">
-                    <colgroup>
+                    {{-- <colgroup>
                         <col style="width: 40px" />
-                        <col style="width: 200px" />
+                        <col style="width: 400px" />
                         <col style="width: 150px" />
                         <col style="width: 100px" />
                         <col style="width: 100px" />
                         <col style="width: 140px" />
-                    </colgroup>
+                    </colgroup> --}}
                     <thead>
                         <tr class="text-left bg-gray-50 ">
                             <th class="p-3 border text-center">#</th>
                             <th class="p-3 border text-center">Tên</th>
                             <th class="p-3 border text-center">Ảnh bìa</th>
                             <th class="p-3 border text-center">Chap mới nhất</th>
-                            <th class="p-3 border text-center">Ngày cập nhập</th>
                             <th class="p-3 border text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -41,13 +40,7 @@
                                     <td class="p-3 border text-center">
                                         {{ $comic->latestChapter->chapter_number }}
                                     </td>
-                                    <td class="p-3 border text-center">
-                                        {{ $comic->latestChapter->chapter_number->created_at }}
-                                    </td>
                                 @else
-                                    <td class="p-3 border text-center">
-                                        Chưa có chap
-                                    </td>
                                     <td class="p-3 border text-center">
                                         Chưa có chap
                                     </td>
@@ -55,7 +48,7 @@
 
                                 <td class="p-3 border">
                                     <div class="flex grid grid-cols-2 items-center gap-2">
-                                        <button data-url="{{ route('admin.comic.edit', $comic->id) }}"
+                                        <button data-url="{{ route('admin.comic.show', $comic->id) }}"
                                             class="comicBtn col-span-2  px-3 py-1 rounded bg-blue-500 text-white border border-blue-600 hover:bg-blue-600 hover:shadow transition-all">
                                             Chi tiết
                                         </button>
@@ -82,7 +75,7 @@
             <p>Chưa có truyện nào.</p>
         @endif
 
-        <div id="modalOverlay" class="fixed inset-0 bg-black/40 flex items-center hidden justify-center z-50">
+        <div id="modalOverlay" class="absolute inset-0 bg-black/40 flex items-center hidden justify-center z-50">
             <div id="modalBox" class="bg-white rounded-lg shadow-lg p-6 w-80">
                 <h2 class="text-lg font-semibold mb-4 text-center">Xác nhận xóa?</h2>
                 <div class="flex justify-center gap-4">
@@ -93,5 +86,6 @@
             </div>
         </div>
     </div>
+    <x-toast/>
 
 @endsection

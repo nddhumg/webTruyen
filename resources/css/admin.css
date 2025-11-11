@@ -6,3 +6,35 @@
 #dashboard li {
     @apply rounded-lg;
 }
+/* Hiệu ứng xuất hiện từ trên xuống */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hiệu ứng biến mất lên trên */
+@keyframes fadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Gắn animation vào class */
+.animate-slide-down {
+  animation: slideDown 0.4s ease-out;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.3s ease-in forwards;
+}

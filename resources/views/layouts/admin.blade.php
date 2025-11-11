@@ -105,9 +105,10 @@
         </div>
     </aside>
 
-    <main class="flex-1 bg-white overflow-y-auto">
+    <main class="relative flex-1 bg-white overflow-y-auto">
         <div class= "m-6">
             @yield('content')
         </div>
     </main>
+    @stack('scripts')
 </body>

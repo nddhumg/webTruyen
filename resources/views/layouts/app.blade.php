@@ -18,6 +18,6 @@
     {{-- Footer --}}
     @include('blocks.footer')
 
-
+@stack('scripts')
 </body>
 </html>
